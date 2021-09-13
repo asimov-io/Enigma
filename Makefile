@@ -23,7 +23,7 @@ MODULES=$(SOURCES:.ml=.cmx)
 # On pourra, si besoin ajouter des alias à la liste définie ci-dessous,
 # qui correspond aux exécutables requis pour le projet.
 
-all: $(MODULES) 
+all: $(MODULES) enigma
 doc: html/index.html
 
 ALIASES = cycles bombe brute tests
