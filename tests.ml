@@ -2,7 +2,7 @@
 (* Uncomment as you implement features *)
 
 open Symbol
-(* open Graph *)
+open Graph
 (* open Cycles *)
 (* open Path *)
 (* open Board *)
@@ -57,10 +57,11 @@ let () =
       assert (Symbol.Map.get mminusone (of_char 'W') = of_char 'V');
       assert (Symbol.Map.get mminusone (of_char 'A') = of_char 'Z');
       
-      Printf.printf "OK\n";
+      (* Symbol.Map.print_tmap stdout mplusone; *)
+      Printf.printf "\nOK\n";
     end
 
-(*
+
 let () =
   if Filename.basename Sys.argv.(0) = "tests" then begin
       Printf.printf "Testing Graph Module:\t";
@@ -80,10 +81,12 @@ let () =
       assert (fold_over_connected g (fun i _ -> i+1) 0 a = 2);
       add_edge g a (of_char 'Z') 4;
       assert (fold_over_connected g (fun i _ -> i+1) 0 a = 3);
+
+      (* print_path g stdout [(of_char 'A'); (of_char 'B'); a]; *)
                       
       Printf.printf "OK\n";
     end
- *)
+
 
 (*
 let () =
