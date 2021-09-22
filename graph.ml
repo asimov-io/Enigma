@@ -1,11 +1,10 @@
 type sym = Symbol.sym
 
-
 module Positions = Set.Make(Int)
 
 type t = Positions.t array array
 
-let create () : t = Array.make_matrix Symbol.nb_syms Symbol.nb_syms (Positions.empty)
+let create ((): unit) : t = Array.make_matrix Symbol.nb_syms Symbol.nb_syms Positions.empty
 
 let add_edge (g: t) (s1: sym) (s2: sym) (i: int) : unit =
   let i1 = Symbol.to_int s1 in let i2 = Symbol.to_int s2 in

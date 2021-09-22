@@ -82,7 +82,7 @@ let () =
       add_edge g a (of_char 'Z') 4;
       assert (fold_over_connected g (fun i _ -> i+1) 0 a = 3);
 
-      (* print_path g stdout [(of_char 'A'); (of_char 'B'); a]; *)
+      print_path g stdout [(of_char 'A'); (of_char 'B'); a];
                       
       Printf.printf "OK\n";
     end
