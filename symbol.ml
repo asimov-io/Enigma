@@ -47,7 +47,7 @@ module Set =
     let add (s: sym) (set: t) : t =
       let rec aux s set mult rem = match s with
         | 0 -> (2 * (set / 2) + 1) * mult + rem
-        | _ -> aux (s -- 1) (set / 2) (2 * mult) (2 * rem + set mod 2)
+        | _ -> aux (s -- 1) (set / 2) (2 * mult) (rem + mult * (set mod 2))
       in aux s set 1 0
 
     let rec singleton (s: sym) : t = match s with
