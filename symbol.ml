@@ -35,24 +35,38 @@ let fold (f: 'a -> sym -> 'a) (x: 'a) : 'a =
     | _ -> aux (f acc s) (next s)
   in aux x 0
 
+(* Computes a ** b *)
+let quick_exp a b =
+  let rec aux acc a b = match b with
+    | 0 -> acc
+    | 1 -> acc * a
+    | n when n mod 2 = 0 -> aux acc (a * a) (n / 2)
+    | _ -> aux (a * acc) (a * a) (b / 2)
+  in aux 1 a b
+
+
 module Set =
   struct
     type t = int
     let empty = 0
 
-    let rec member (s: sym) (set: t) : bool = match s with
-      | 0 -> (set mod 2) = 1
-      | _ -> member (s -- 1) (set / 2)
+    let member (s: sym) (set: t) : bool =
+      (set / (quick_exp 2 (to_int s))) mod 2 = 1
     
-    let add (s: sym) (set: t) : t =
+    (* let add (s: sym) (set: t) : t =
       let rec aux s set mult rem = match s with
         | 0 -> (2 * (set / 2) + 1) * mult + rem
         | _ -> aux (s -- 1) (set / 2) (2 * mult) (rem + mult * (set mod 2))
-      in aux s set 1 0
+      in aux s set 1 0 *)
 
-    let rec singleton (s: sym) : t = match s with
-      | 0 -> 1
-      | _ -> 2 * singleton (s -- 1)
+    let add (s: sym) (set: t) : t =
+      if not (member s set) then
+        set + quick_exp 2 (to_int s)
+      else
+        set
+
+    let rec singleton (s: sym) : t =
+      quick_exp 2 (to_int s)
 end
 
 
