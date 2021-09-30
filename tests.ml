@@ -5,7 +5,7 @@ open Symbol
 open Graph
 open Cycles
 open Path
-(* open Board *)
+open Board
    
 let () =
   if Filename.basename Sys.argv.(0) = "tests" then begin
@@ -168,10 +168,10 @@ let () =
     end
 
 
-(*  
+ 
 let () =
   if Filename.basename Sys.argv.(0) = "tests" then begin
-      Printf.printf "Board (1st version):\t";
+      Printf.printf "Board (1st version):\n";
       let b = top () in
       assert (possible b a a);
       assert (possible b (of_char 'Z') (of_char 'J'));
@@ -203,9 +203,45 @@ let () =
       assert (possible b' (of_char 'Q') (of_char 'T') = false);
       assert (possible b' a (of_char 'R') = false);
 
+      let b'' = top () in
+      remove_assoc b'' a a;
+      remove_assoc b'' a (of_char 'D');
+      remove_assoc b'' (of_char 'B') (of_char 'B');
+      remove_assoc b'' (of_char 'C') (of_char 'C');
+      remove_assoc b'' (of_char 'D') (of_char 'D');
+
+      Symbol.iter (fun c ->
+      match (to_int c > 3 && to_int c < 15) with
+      | true -> Symbol.iter (fun c' -> 
+        match ((to_int c') < nb_syms - 1 - ((to_int c) - 4)) with
+          | true -> remove_assoc b'' c c'
+          | false -> ())
+      | false -> ());
+
+      
+      (* Printf.printf "Board from the example page 8:\n";
+      Board.print ~long: true stdout b'';
+      remove_assoc b'' a (of_char 'C');
+      Printf.printf "After the removal of 'A' <-> 'C':\n";
+      Board.print ~long: false stdout b''; *)
+
+
+      assert (possible b'' a (of_char 'B'));
+      assert (possible b'' (of_char 'B') (of_char 'A'));
+      assert (possible b'' (of_char 'C') (of_char 'D'));
+      assert (possible b'' (of_char 'D') (of_char 'C'));
+      assert (possible b'' (of_char 'C') (of_char 'A') = false);
+      assert (possible b'' (of_char 'A') (of_char 'C') = false);
+      assert (possible b'' (of_char 'B') (of_char 'C') = false);
+      assert (possible b'' (of_char 'C') (of_char 'B') = false);
+      assert (possible b'' (of_char 'B') (of_char 'D') = false);
+      assert (possible b'' (of_char 'D') (of_char 'B') = false);   
+      assert (possible b'' (of_char 'D') (of_char 'A') = false);   
+      assert (possible b'' (of_char 'A') (of_char 'D') = false);
+
       Printf.printf "OK\n";
     end
- *)
+
 
 (*  
 let () =
