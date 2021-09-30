@@ -65,7 +65,7 @@ module Set =
       else
         set
 
-    let rec singleton (s: sym) : t =
+    let singleton (s: sym) : t =
       quick_exp 2 (to_int s)
 end
 
