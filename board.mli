@@ -30,11 +30,11 @@ val remove_assoc : t -> Symbol.sym -> Symbol.sym -> unit
 (** Semi-persistency *)
 
 (** Abstract representation of the state of a board. *)
-type state
+(* type state *)
 
 (** Returns the current state of a board. This should be immediate. *)
-val save : t -> state
+(* val save : t -> state *)
 
 (** Restore a board to one of its previous states. The board that
   * should be restored is implicit in the state. *)
-val restore : state -> unit
+(* val restore : state -> unit *)
