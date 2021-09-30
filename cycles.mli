@@ -6,6 +6,6 @@ val cycles : Graph.t -> cycle list
 
 val print_cycle : cycle -> unit
 
-val itere : (cycle -> 'a) -> cycle list -> unit
+val iter_fusion : (cycle -> 'a) -> cycle list -> unit
 
-val itere_multi : (cycle -> 'a) -> cycle list -> unit
+val iter_multi : (cycle -> 'a) -> cycle list -> unit

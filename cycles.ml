@@ -70,10 +70,9 @@ let print_cycle (c: cycle) : unit =
     Printf.fprintf stdout "}-> ";
   done;
   Printf.fprintf stdout "%c\n" (to_char v.(n - 1))
-    
 
 
-let itere (f: cycle -> 'a) (l: cycle list) : unit =
+let iter_fusion (f: cycle -> 'a) (l: cycle list) : unit =
   List.iter (fun c -> let _ = f c in ()) l
 
 let develop (c: cycle) : cycle list =
@@ -87,8 +86,8 @@ let develop (c: cycle) : cycle list =
   in aux 0 [];
   !res
 
-let itere_multi (f: cycle -> 'a) (l: cycle list) : unit =
-  List.iter (fun c -> itere f (develop c)) l
+let iter_multi (f: cycle -> 'a) (l: cycle list) : unit =
+  List.iter (fun c -> iter_fusion f (develop c)) l
 
 (* Behaviour of the "enigma" executable. *)
 let () =
@@ -97,7 +96,7 @@ let () =
     let c = cycles g in
     let n = List.length c in
     let n_multi = ref 0 in
-    itere_multi (fun _ -> incr n_multi) c;
+    iter_multi (fun _ -> incr n_multi) c;
     Printf.fprintf stdout "Il y a %i cycles avant expansion" n;
     if n <= 20 then begin
       Printf.printf ":\n";
